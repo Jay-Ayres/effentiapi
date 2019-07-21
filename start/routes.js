@@ -24,3 +24,4 @@ Route.get('/files/:id', 'FileController.show')
 Route.post('/files', 'FileController.store')
 
 Route.post('events', 'EventController.store')
+Route.put('eventuser', 'EventUserController.update')
