@@ -21,8 +21,11 @@ Route.post('sessions', 'SessionController.store')
 Route.post('passwords', 'ForgotPasswordController.store')
 
 Route.group(() => {
+  Route.resource('posts', 'PostController').apiOnly()
   Route.get('/files/:id', 'FileController.show')
   Route.post('/files', 'FileController.store')
   Route.post('events', 'EventController.store')
+  Route.get('events', 'EventController.index')
   Route.put('eventuser', 'EventUserController.update')
+  Route.get('users', 'UserController.index')
 }).middleware(['auth'])

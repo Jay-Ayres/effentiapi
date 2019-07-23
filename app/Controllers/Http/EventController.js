@@ -3,17 +3,17 @@
 const Event = use('App/Models/Event')
 
 class EventController {
+  async index ({ params, request, response, view }) {
+    const events = await Event.all()
+
+    return events
+  }
+
   async store ({ request }) {
     const data = request.only(['user_id', 'name', 'description'])
     const users = request.only(['users'])
 
     const event = await Event.create(data)
-
-    console.log('logando usuarios')
-    console.log(users)
-    console.log('tamanho do array')
-    console.log(users.users.length)
-
 
     if (users && users.users.length > 0) {
       console.log('dentro do metodo')
