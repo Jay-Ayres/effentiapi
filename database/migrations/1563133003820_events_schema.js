@@ -9,8 +9,9 @@ class EventsSchema extends Schema {
       table.increments()
       table.integer('user_id').unsigned().references('id').inTable('users').onUpdate('CASCADE').onDelete('SET NULL')
       table.string('name', 80).notNullable()
-      table.string('description', 254).notNullable()
+      table.string('description', 100).notNullable()
       table.date('limit_date')
+      table.date('event_date')
       table.timestamps()
     })
   }
