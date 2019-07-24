@@ -15,8 +15,12 @@ class EventController {
 
     const event = await Event.create(data)
 
-    if (users && users.users.length > 0) {
-      console.log('dentro do metodo')
+    // console.log("logando usuarios")
+    // console.log(users)
+
+
+    if (users.users && users.users.length > 0) {
+      // console.log('dentro do metodo')
       await event.users().attach(users.users)
       event.users = await event.users().fetch()
     }
