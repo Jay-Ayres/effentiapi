@@ -3,8 +3,11 @@
 const Event = use('App/Models/Event')
 
 class EventController {
-  async index ({ params, request, response, view }) {
-    const events = await Event.all()
+  async index ({ params, request, response }) {
+
+    const { page } = request.get()
+
+    const events = await Event.query().paginate(page)
 
     return events
   }
