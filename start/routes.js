@@ -22,6 +22,7 @@ Route.post('passwords', 'ForgotPasswordController.store')
 
 //Route.group(() => {
   Route.resource('posts', 'PostController').apiOnly()
+  Route.post('posts/:id/images', 'PostImageController.store')
   Route.get('/files/:id', 'FileController.show')
   Route.post('/files', 'FileController.store')
   Route.post('events', 'EventController.store')
