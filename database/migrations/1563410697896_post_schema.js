@@ -8,6 +8,7 @@ class PostSchema extends Schema {
     this.create('posts', (table) => {
       table.increments()
       table.integer('user_id').unsigned().references('id').inTable('users').onUpdate('CASCADE').onDelete('SET NULL')
+      table.integer('file_id').unsigned().references('id').inTable('files').onUpdate('CASCADE').onDelete('SET NULL')
       table.string('name', 80).notNullable().unique()
       table.string('description', 254).notNullable().unique()
       table.timestamps()

@@ -7,10 +7,10 @@ class FileSchema extends Schema {
   up () {
     this.create('files', (table) => {
       table.increments()
-      table.string('file').notNullable()
       table.string('name').notNullable()
-      table.string('type', 20)
-      table.string('subtype', 20)
+      table.string('key').notNullable()
+      table.string('url')
+      table.string('contentType')
       table.timestamps()
     })
   }
