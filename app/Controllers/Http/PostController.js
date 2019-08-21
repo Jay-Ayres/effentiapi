@@ -34,7 +34,8 @@ class PostController {
   async store ({ request, response, auth }) {
     const data = request.only(['name', 'description'])
 
-    const post = await Post.create({ ...data, user_id: auth.user.id })
+   // const post = await Post.create({ ...data, user_id: auth.user.id })
+    const post = await Post.create({ ...data })
 
     return post
   }

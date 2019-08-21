@@ -7,6 +7,10 @@ class Event extends Model {
   users () {
     return this.belongsToMany('App/Models/User')
   }
+
+  File () {
+    return this.hasOne('App/Models/File')
+  }
 }
 
 module.exports = Event
