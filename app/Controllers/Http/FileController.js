@@ -15,7 +15,7 @@ const Event = use('App/Models/Event')
 const User = use('App/Models/User')
 
 class FileController {
-  async store ({ request, response }) {
+  async store ({ request, response, params }) {
     console.log('teste')
 
     request.multipart.file('file', {}, async file => {
@@ -30,12 +30,17 @@ class FileController {
           ACL
         })
 
-        await File.create({
+        const imagem = await File.create({
           name: file.clientName,
           key: key,
           url: url,
           contentType: ContentType
         })
+
+        const user = await User.findOrFail(params.id)
+        user.file_id = imagem.id
+        await user.save()
+
       } catch (error) {
         return response.status(err.status).send({ error: { message: 'Erro ao fazer upload de arquivo' } })
       }

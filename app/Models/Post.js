@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Post extends Model {
 
-  File () {
+  Files () {
     return this.hasOne('App/Models/File')
   }
 }

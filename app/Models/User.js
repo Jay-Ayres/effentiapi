@@ -38,6 +38,10 @@ class User extends Model {
   events () {
     return this.belongsToMany('App/Models/Event')
   }
+
+  Files () {
+    return this.hasOne('App/Models/File')
+  }
 }
 
 module.exports = User

@@ -8,7 +8,7 @@ class Event extends Model {
     return this.belongsToMany('App/Models/User')
   }
 
-  File () {
+  Files () {
     return this.hasOne('App/Models/File')
   }
 }
