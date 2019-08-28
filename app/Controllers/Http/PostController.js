@@ -19,7 +19,9 @@ class PostController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-    const posts = await Post.all()
+    //const posts = await Post.all().fetch()
+    const posts = await Post.query().with('User').with('Files').fetch()
+
     return posts
   }
 
@@ -32,7 +34,7 @@ class PostController {
    * @param {Response} ctx.response
    */
   async store ({ request, response, auth }) {
-    const data = request.only(['name', 'description'])
+    const data = request.only(['name', 'description', 'user_id'])
 
    // const post = await Post.create({ ...data, user_id: auth.user.id })
     const post = await Post.create({ ...data })

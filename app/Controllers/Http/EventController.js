@@ -7,7 +7,7 @@ class EventController {
 
     const { page } = request.get()
 
-    const events = await Event.query().paginate(page)
+    const events = await Event.query().with('User').with('Files').paginate(page)
 
     return events
   }
@@ -18,16 +18,11 @@ class EventController {
 
     const event = await Event.create(data)
 
-    // console.log("logando usuarios")
-    // console.log(users)
-
-
     if (users.users && users.users.length > 0) {
       // console.log('dentro do metodo')
       await event.users().attach(users.users)
       event.users = await event.users().fetch()
     }
-
     return event
   }
 
