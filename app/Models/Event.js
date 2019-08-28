@@ -4,12 +4,13 @@
 const Model = use('Model')
 
 class Event extends Model {
-  users () {
-    return this.belongsToMany('App/Models/User')
-  }
 
   Files () {
-    return this.hasOne('App/Models/File')
+    return this.belongsTo('App/Models/File')
+  }
+
+  User () {
+    return this.belongsTo('App/Models/User')
   }
 }
 

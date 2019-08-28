@@ -39,8 +39,12 @@ class User extends Model {
     return this.belongsToMany('App/Models/Event')
   }
 
-  Files () {
-    return this.hasOne('App/Models/File')
+  File () {
+    return this.belongsTo('App/Models/File')
+  }
+
+  Posts () {
+    return this.hasMany('App/Models/Post')
   }
 }
 
