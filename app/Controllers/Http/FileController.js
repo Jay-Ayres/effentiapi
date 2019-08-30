@@ -115,6 +115,14 @@ class FileController {
 
     return response.download(Helpers.tmpPath(`uploads/${file.file}`))
   }
+
+  async index ({ request, response, view }) {
+    console.log("teste")
+
+    const files = await File.query().fetch()
+
+    return files
+  }
 }
 
 module.exports = FileController
