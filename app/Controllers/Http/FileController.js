@@ -25,11 +25,11 @@ class FileController {
         const ACL = "public-read"
         const key = `${Date.now()}.${file.subtype}`
 
-        const url = await Drive.put(key, file.stream, {
-          ContentType,
-          ACL
-        })
-
+        // const url = await Drive.put(key, file.stream, {
+        //   ContentType,
+        //   ACL
+        // })
+        const url = 'teste'
         const imagem = await File.create({
           name: file.clientName,
           key: key,
