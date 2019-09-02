@@ -42,7 +42,7 @@ class FileController {
         await user.save()
 
       } catch (error) {
-        return response.status(err.status).send({ error: { message: 'Erro ao fazer upload de arquivo' } })
+        return response.status(error.status).send({ error: { message: 'Erro ao fazer upload de arquivo' } })
       }
     }).process()
   }
