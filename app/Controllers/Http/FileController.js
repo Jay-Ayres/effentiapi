@@ -73,8 +73,8 @@ class FileController {
         const post = await Post.findOrFail(params.id)
         post.file_id = imagem.id
         await post.save()
-      } catch (error) {
-        return response.status(err.status).send({ error: { message: 'Erro ao fazer upload de arquivo' } })
+      } catch (err) {
+        return response.status(err.status).send(err)
       }
     }).process()
   }
