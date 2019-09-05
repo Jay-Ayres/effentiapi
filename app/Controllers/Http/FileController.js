@@ -48,10 +48,11 @@ class FileController {
   }
 
   async storePost ({ request, response, params }) {
-    console.log('teste!!@ooj')
+    console.log('teste')
+
     request.multipart.file('file', {}, async file => {
       try {
-        console.log('teste!!@ooj')
+
         const ContentType = file.headers['content-type']
         const ACL = "public-read"
         const key = `${Date.now()}.${file.subtype}`
@@ -60,8 +61,6 @@ class FileController {
           ContentType,
           ACL
         })
-        console.log('logando')
-        console.log(url)
 
         const imagem = await File.create({
           name: file.clientName,
@@ -70,14 +69,16 @@ class FileController {
           contentType: ContentType
         })
 
-        const post = await Post.findOrFail(params.id)
-        post.file_id = imagem.id
-        await post.save()
-      } catch (err) {
-        return response.status(err.status).send(err)
+        // const user = await User.findOrFail(params.id)
+        // user.file_id = imagem.id
+        // await user.save()
+
+      } catch (error) {
+        return response.status(error.status).send({ error: { message: 'Erro ao fazer upload de arquivo' } })
       }
     }).process()
   }
+
 
   async storeEvent ({ request, response, params }) {
 
