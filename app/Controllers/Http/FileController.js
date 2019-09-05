@@ -48,10 +48,10 @@ class FileController {
   }
 
   async storePost ({ request, response, params }) {
-
+    console.log('teste!!@ooj')
     request.multipart.file('file', {}, async file => {
       try {
-        console.log('teste!!@')
+        console.log('teste!!@ooj')
         const ContentType = file.headers['content-type']
         const ACL = "public-read"
         const key = `${Date.now()}.${file.subtype}`
