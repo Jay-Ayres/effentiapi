@@ -16,6 +16,7 @@ const User = use('App/Models/User')
 
 class FileController {
   async store ({ request, response, params }) {
+    console.log('outro l')
     request.multipart.file('file', {}, async file => {
       try {
         const ContentType = file.headers['content-type']
@@ -49,6 +50,7 @@ class FileController {
   }
 
   async storePost ({ request, response, params }) {
+    console.log('log')
     request.multipart.file('file', {}, async file => {
       try {
         const ContentType = file.headers['content-type']
@@ -83,7 +85,7 @@ class FileController {
         post.merge(data)
         console.log('Visualizando post apos merge')
 
-        await post.save().process()
+        await post.save()
         console.log('post salvo')
       } catch (error) {
         return response.status(error.status).send({ error: { message: 'Erro ao fazer upload de arquivo' } })
