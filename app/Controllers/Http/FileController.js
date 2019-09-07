@@ -66,15 +66,25 @@ class FileController {
           url: url,
           contentType: ContentType
         })
+        console.log('imagem criada')
 
         const data = { file_id: '' }
+        console.log('visualizando data')
+        console.log(data)
 
         data.file_id = imagem.id
 
+        console.log('dtacom imagem')
+        console.log(data)
+
         const post = await Post.findOrFail(params.id)
+        console.log('visualizando Post encontrado')
+        console.log(post)
         post.merge(data)
+        console.log('Visualizando post apos merge')
 
         await post.save().process()
+        console.log('post salvo')
       } catch (error) {
         return response.status(error.status).send({ error: { message: 'Erro ao fazer upload de arquivo' } })
       }
