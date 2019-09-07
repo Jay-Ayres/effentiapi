@@ -16,11 +16,8 @@ const User = use('App/Models/User')
 
 class FileController {
   async store ({ request, response, params }) {
-    console.log('teste')
-
     request.multipart.file('file', {}, async file => {
       try {
-
         const ContentType = file.headers['content-type']
         const ACL = "public-read"
         const key = `${Date.now()}.${file.subtype}`
@@ -37,10 +34,14 @@ class FileController {
           contentType: ContentType
         })
 
-        const user = await User.findOrFail(params.id)
-        user.file_id = imagem.id
-        await user.save()
+        const data = { file_id: '' }
 
+        data.file_id = imagem.id
+
+        const user = await User.findOrFail(params.id)
+        user.merge(data)
+
+        await user.save().process()
       } catch (error) {
         return response.status(error.status).send({ error: { message: 'Erro ao fazer upload de arquivo' } })
       }
@@ -48,11 +49,8 @@ class FileController {
   }
 
   async storePost ({ request, response, params }) {
-    console.log('teste')
-
     request.multipart.file('file', {}, async file => {
       try {
-
         const ContentType = file.headers['content-type']
         const ACL = "public-read"
         const key = `${Date.now()}.${file.subtype}`
@@ -69,19 +67,21 @@ class FileController {
           contentType: ContentType
         })
 
-        // const user = await User.findOrFail(params.id)
-        // user.file_id = imagem.id
-        // await user.save()
+        const data = { file_id: '' }
 
+        data.file_id = imagem.id
+
+        const post = await Post.findOrFail(params.id)
+        post.merge(data)
+
+        await post.save().process()
       } catch (error) {
         return response.status(error.status).send({ error: { message: 'Erro ao fazer upload de arquivo' } })
       }
     }).process()
   }
 
-
   async storeEvent ({ request, response, params }) {
-
     request.multipart.file('file', {}, async file => {
       try {
         const ContentType = file.headers['content-type']
@@ -92,8 +92,6 @@ class FileController {
           ContentType,
           ACL
         })
-        console.log('logando')
-        console.log(url)
 
         const imagem = await File.create({
           name: file.clientName,
@@ -102,11 +100,15 @@ class FileController {
           contentType: ContentType
         })
 
+        const data = { file_id: '' }
+
+        data.file_id = imagem.id
+
         const event = await Event.findOrFail(params.id)
-        event.file_id = imagem.id
-        await event.save()
+        event.merge(data)
+        await event.save().process()
       } catch (error) {
-        return response.status(err.status).send({ error: { message: 'Erro ao fazer upload de arquivo' } })
+        return response.status(error.status).send({ error: { message: 'Erro ao fazer upload de arquivo' } })
       }
     }).process()
   }
@@ -118,8 +120,6 @@ class FileController {
   }
 
   async index ({ request, response, view }) {
-    console.log("teste")
-
     const files = await File.query().fetch()
 
     return files

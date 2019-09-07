@@ -52,9 +52,9 @@ class PostController {
    * @param {View} ctx.view
    */
   async show ({ params }) {
-    const post = await Post.findOrFail(params.id)
+    const posts = await Post.findOrFail(params.id)
 
-    return post
+    return posts
   }
 
   /**
