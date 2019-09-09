@@ -68,6 +68,7 @@ class FileController {
           url: url,
           contentType: ContentType
         })
+        /*
         console.log('imagem criada')
 
         const data = { file_id: '' }
@@ -87,6 +88,7 @@ class FileController {
 
         await post.save()
         console.log('post salvo')
+        */
       } catch (error) {
         return response.status(error.status).send({ error: { message: 'Erro ao fazer upload de arquivo' } })
       }
