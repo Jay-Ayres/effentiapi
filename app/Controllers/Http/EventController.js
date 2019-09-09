@@ -13,7 +13,7 @@ class EventController {
   }
 
   async store ({ request }) {
-    const data = request.only(['user_id', 'name', 'description'])
+    const data = request.only(['user_id', 'name', 'description', 'event_date', 'event_end_date'])
     const users = request.only(['users'])
 
     const event = await Event.create(data)
@@ -28,7 +28,7 @@ class EventController {
 
   async update ({ params, request }) {
     const event = await Event.findOrFail(params.id)
-    const data = request.only(['user_id', 'name', 'description'])
+    const data = request.only(['user_id', 'name', 'description', 'event_date', 'event_end_date'])
 
     event.merge(data)
 

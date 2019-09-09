@@ -13,6 +13,7 @@ class EventsSchema extends Schema {
       table.string('description', 100).notNullable()
       table.date('limit_date')
       table.date('event_date')
+      table.date('event_end_date')
       table.timestamps()
     })
   }
