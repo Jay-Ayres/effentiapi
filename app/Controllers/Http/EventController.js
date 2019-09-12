@@ -1,6 +1,7 @@
 'use strict'
 
 const Event = use('App/Models/Event')
+const User = use('App/Models/User')
 
 class EventController {
   async index ({ params, request, response }) {
@@ -14,15 +15,13 @@ class EventController {
 
   async store ({ request }) {
     const data = request.only(['user_id', 'name', 'description', 'event_date', 'event_end_date'])
-    const users = request.only(['users'])
+    const users = await User.query().fetch()
 
+    let idsusers = users.rows.map(user => user.id)
     const event = await Event.create(data)
 
-    if (users.users && users.users.length > 0) {
-      // console.log('dentro do metodo')
-      await event.users().attach(users.users)
-      event.users = await event.users().fetch()
-    }
+    await event.users().attach(idsusers)
+
     return event
   }
 
