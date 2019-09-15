@@ -28,7 +28,7 @@ Route.post('posts/:id/files', 'FileController.storePost')
 Route.post('events/:id/files', 'FileController.storeEvent')
 Route.post('users/:id/files', 'FileController.store')
 
-Route.post('images', 'PostImageController.store')
+Route.post('images', 'FileController.storePost')
 Route.get('/files/:id', 'FileController.show')
 Route.post('/files', 'FileController.storeOnly')
 Route.get('/files', 'FileController.index')
