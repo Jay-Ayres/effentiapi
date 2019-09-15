@@ -55,7 +55,7 @@ class FileController {
     console.log('log')
     request.multipart.file('file', {}, async file => {
       console.log("dentro do metodo")
-      /*
+
       try {
         const ContentType = file.headers['content-type']
         const ACL = "public-read"
@@ -96,7 +96,6 @@ class FileController {
       } catch (error) {
         return response.status(error.status).send({ error: { message: 'Erro ao fazer upload de arquivo' } })
       }
-      */
     }).process()
   }
 
