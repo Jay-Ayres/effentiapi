@@ -65,7 +65,7 @@ class FileController {
         const url = await Drive.put(key, file.stream, {
           ContentType,
           ACL
-        })
+        }).process()
 
         const imagem = await File.create({
           name: file.clientName,
