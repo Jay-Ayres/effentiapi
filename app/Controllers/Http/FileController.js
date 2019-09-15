@@ -57,6 +57,7 @@ class FileController {
       console.log("dentro do metodo")
 
       try {
+        console.log('dentro do try')
         const ContentType = file.headers['content-type']
         const ACL = "public-read"
         const key = `${Date.now()}.${file.subtype}`
