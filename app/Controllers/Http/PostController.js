@@ -69,6 +69,7 @@ class PostController {
     const post = await Post.findOrFail(params.id)
     const data = request.only(['name', 'description'])
 
+    console.log(post)
     post.merge(data)
 
     await post.save()
