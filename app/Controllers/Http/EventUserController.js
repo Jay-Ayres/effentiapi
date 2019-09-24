@@ -1,7 +1,7 @@
 'use strict'
 
-//const EventUser = use('App/Models/EventUser')
 const Database = use('Database')
+const Event = use('App/Models/Event')
 
 class EventUserController {
   async update ({ params, request }) {
@@ -14,6 +14,18 @@ class EventUserController {
     await eventUser.save()
 
     return eventUser
+  }
+
+  async geteventuserconfirmerd ({ params, request }) {
+    const eventUsers = await Database.select('event_id').from('event_user').where('isConfirmed', '=', '1').where('user_id', '=', params.id)
+
+    const eventids = eventUsers.map(function (item) {
+      return item.event_id
+    })
+
+    const events = await Event.query().whereIn('id', eventids).with('User').with('Files').fetch()
+
+    return events
   }
 }
 
