@@ -39,6 +39,7 @@ Route.put('events/:id', 'EventController.update')
 Route.delete('events/:id', 'EventController.destroy')
 
 Route.put('eventuser', 'EventUserController.update')
+Route.get('eventuser/user/:id', 'EventUserController.geteventuserconfirmerd')
 
 Route.get('users', 'UserController.index')
 //}).middleware(['auth'])
