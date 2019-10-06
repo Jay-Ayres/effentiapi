@@ -15,7 +15,7 @@ class EventUserController {
 
     await eventUser.save()
     */
-   const teste = await EventUser.query().where('event_id', 1).fetch()
+   const teste = await EventUser.query().where('event_id', 1).with('users').fetch()
 
     return teste
   }

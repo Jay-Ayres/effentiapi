@@ -2,6 +2,7 @@
 
 const Event = use('App/Models/Event')
 const User = use('App/Models/User')
+const EventUser = use('App/Models/EventUser')
 
 class EventController {
   async index ({ params, request, response }) {
@@ -13,7 +14,7 @@ class EventController {
     //const events = await Event.find(1)
     //console.log(events)
    // const teste =  await events.users().fetch()
-    const teste = await Event.query().where('id', 1).with('users').fetch()
+    const teste = await Event.query().where('id', 1).fetch()
     console.log("logando teste")
     console.log(teste)
     //const teste = events.data[0]
@@ -22,6 +23,19 @@ class EventController {
     return teste
 
 
+  }
+
+  async eventByUser ({ params, request, response }) {
+    const dataEvent = await Event.all()
+    const events = dataEvent.toJSON()
+    const dataEventUsers = await EventUser.query().where('user_id', params.id).fetch()
+    const eventUsers = dataEventUsers.toJSON()
+    
+    events.forEach(event => {
+      const list = eventUsers.filter(item => item.event_id == event.id)
+      event.isConfirmed = list[0].isConfirmed
+    })
+    return events
   }
 
   async store ({ request }) {
