@@ -14,7 +14,7 @@ class Event extends Model {
   }
 
   users () {
-    return this.belongsToMany('App/Models/User')
+    return this.belongsToMany('App/Models/User').pivotModel('App/Models/EventUser').withPivot(['isConfirmed'])
   }
 }
 

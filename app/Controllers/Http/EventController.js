@@ -2,6 +2,7 @@
 
 const Event = use('App/Models/Event')
 const User = use('App/Models/User')
+const EventUser = use('App/Models/EventUser')
 
 class EventController {
   async index ({ params, request, response }) {
@@ -10,6 +11,19 @@ class EventController {
 
     const events = await Event.query().with('User').with('Files').paginate(page)
 
+    return events
+  }
+
+  async eventByUser ({ params, request, response }) {
+    const dataEvent = await Event.all()
+    const events = dataEvent.toJSON()
+    const dataEventUsers = await EventUser.query().where('user_id', params.id).fetch()
+    const eventUsers = dataEventUsers.toJSON()
+    
+    events.forEach(event => {
+      const list = eventUsers.filter(item => item.event_id == event.id)
+      event.isConfirmed = list[0].isConfirmed
+    })
     return events
   }
 
