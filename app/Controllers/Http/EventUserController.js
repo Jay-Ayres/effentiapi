@@ -2,18 +2,22 @@
 
 const Database = use('Database')
 const Event = use('App/Models/Event')
+const EventUser = use('App/Models/EventUser')
 
 class EventUserController {
   async update ({ params, request }) {
-    const eventUser = await Database.from('event_user').where({ event_id: 17, user_id: 4 })
+    /*
+    const eventUser = await Database.from('event_users').where({ event_id: 17, user_id: 4 })
 
     const data = request.only(['isConfirmed'])
 
     eventUser.merge(data)
 
     await eventUser.save()
+    */
+   const teste = await EventUser.query().where('event_id', 1).fetch()
 
-    return eventUser
+    return teste
   }
 
   async geteventuserconfirmerd ({ params, request }) {

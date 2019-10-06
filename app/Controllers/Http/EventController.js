@@ -6,11 +6,22 @@ const User = use('App/Models/User')
 class EventController {
   async index ({ params, request, response }) {
 
+
     const { page } = request.get()
 
-    const events = await Event.query().with('User').with('Files').paginate(page)
+    // const events = await Event.query().with('User').with('Files').paginate(page)
+    //const events = await Event.find(1)
+    //console.log(events)
+   // const teste =  await events.users().fetch()
+    const teste = await Event.query().where('id', 1).with('users').fetch()
+    console.log("logando teste")
+    console.log(teste)
+    //const teste = events.data[0]
+    //console.log(teste)
 
-    return events
+    return teste
+
+
   }
 
   async store ({ request }) {
