@@ -5,7 +5,7 @@ const Schema = use('Schema')
 
 class EventUserSchema extends Schema {
   up () {
-    this.create('event_users', (table) => {
+    this.create('event_user', (table) => {
       table.integer('event_id').unsigned()
       table.integer('user_id').unsigned()
       table.foreign('event_id').references('events.id').onDelete('cascade')
@@ -16,7 +16,7 @@ class EventUserSchema extends Schema {
   }
 
   down () {
-    this.drop('event_users')
+    this.drop('event_user')
   }
 }
 
