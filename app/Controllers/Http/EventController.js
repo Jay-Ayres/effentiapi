@@ -19,10 +19,28 @@ class EventController {
     const events = dataEvent.toJSON()
     const dataEventUsers = await EventUser.query().where('user_id', params.id).fetch()
     const eventUsers = dataEventUsers.toJSON()
-    
+
     events.forEach(event => {
       const list = eventUsers.filter(item => item.event_id == event.id)
       event.isConfirmed = list[0].isConfirmed
+    })
+    return events
+  }
+
+  async eventAdmin ({ params, request, response }) {
+    const dataEvent = await Event.query().with('users').fetch()
+    const events = dataEvent.toJSON()
+
+    events.forEach(event => {
+      const usersConfirmed = []
+      const usersNotConfirmed = []
+
+      event.users.forEach(user => {
+        (user.pivot.isConfirmed) ? usersConfirmed.push(user) : usersNotConfirmed.push(user)
+      })
+      event.usersConfirmed = usersConfirmed
+      event.usersNotConfirmed = usersNotConfirmed
+      delete event.users
     })
     return events
   }

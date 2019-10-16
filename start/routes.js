@@ -36,6 +36,7 @@ Route.get('/files', 'FileController.index')
 Route.post('events', 'EventController.store')
 Route.get('events', 'EventController.index')
 Route.get('events/user/:id', 'EventController.eventByUser')
+Route.get('eventsAdmin', 'EventController.eventAdmin')
 Route.put('events/:id', 'EventController.update')
 Route.delete('events/:id', 'EventController.destroy')
 
