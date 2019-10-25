@@ -34,7 +34,7 @@ class PostController {
    * @param {Response} ctx.response
    */
   async store ({ request, response, auth }) {
-    const data = request.only(['name', 'description', 'user_id'])
+    const data = request.only(['name', 'description', 'user_id', 'url_image'])
 
    // const post = await Post.create({ ...data, user_id: auth.user.id })
     const post = await Post.create({ ...data })
@@ -67,7 +67,7 @@ class PostController {
    */
   async update ({ params, request, response }) {
     const post = await Post.findOrFail(params.id)
-    const data = request.only(['name', 'description'])
+    const data = request.only(['name', 'description', 'url_image'])
 
     console.log(post)
     post.merge(data)

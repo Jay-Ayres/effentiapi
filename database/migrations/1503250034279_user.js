@@ -13,6 +13,7 @@ class UserSchema extends Schema {
       table.string('password', 60).notNullable()
       table.string('description', 200)
       table.string('mandate', 200)
+      table.string('url_image', 300)
       table.string('technologies', 200)
       table.boolean('isAdmin').defaultTo(false)
       table.string('token')

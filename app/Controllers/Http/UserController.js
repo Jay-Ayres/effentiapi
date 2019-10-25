@@ -10,7 +10,7 @@ class UserController {
   }
 
   async store ({ request }) {
-    const data = request.only(['username', 'email', 'password', 'mandate', 'technologies', 'description'])
+    const data = request.only(['username', 'email', 'password', 'mandate', 'technologies', 'description', 'url_image'])
 
     const user = await User.create(data)
     return user
@@ -19,7 +19,7 @@ class UserController {
   async update ({ params, request, response }) {
     const post = await User.findOrFail(params.id)
 
-    const data = request.only(['username', 'email', 'password', 'mandate', 'technologies', 'description'])
+    const data = request.only(['username', 'email', 'password', 'mandate', 'technologies', 'description', 'url_image'])
 
     post.merge(data)
 
