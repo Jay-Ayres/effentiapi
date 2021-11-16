@@ -29,7 +29,7 @@
     "@adonisjs/mail": "^3.0.9",
     "@adonisjs/validator": "^5.0.6",
     "@sentry/node": "^5.6.2",
-    "aws-sdk": "^2.512.0",
+    "aws-sdk": "^2.814.0",
     "moment": "^2.24.0",
     "mssql": "^5.1.0",
     "multer-s3": "^2.9.0",
